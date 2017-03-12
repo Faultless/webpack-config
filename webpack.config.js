@@ -3,13 +3,39 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const glob = require('glob');
+var fs = require('fs');
 
 const parts = require('./webpack.parts');
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
+  server: path.join(__dirname, 'server'),
   build: path.join(__dirname, 'build'),
 };
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
+
+const backendConfig = merge([
+  {
+    entry: {
+      app: './server/app.js',
+    },
+    target: 'node',
+    output: {
+      path: PATHS.build,
+      filename: 'backend.js',
+    },
+    externals: nodeModules,
+  },
+  parts.lintJavaScript({ include: PATHS.server }),
+]);
 
 const commonConfig = merge([
   {
@@ -35,7 +61,7 @@ const productionConfig = merge([
     use: ['css-loader', parts.autoprefix()],
   }),
   parts.purifyCSS({
-      paths: glob.sync(path.join(PATHS.app, '**', '*')),
+    paths: glob.sync(path.join(PATHS.app, '**', '*')),
   }),
 ]);
 
@@ -56,6 +82,10 @@ const developmentConfig = merge([
 module.exports = function(env) {
   if (env === 'production') {
     return merge(commonConfig, productionConfig);
+  }
+
+  if (env === 'dev-development') {
+    return backendConfig;
   }
 
   return merge(commonConfig, developmentConfig);
