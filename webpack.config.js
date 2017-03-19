@@ -10,7 +10,7 @@ const parts = require('./webpack.parts');
 const PATHS = {
   app: path.join(__dirname, 'app'),
   server: path.join(__dirname, 'server'),
-  build: path.join(__dirname, 'build'),
+  build: path.join(__dirname, 'server/public'),
 };
 
 var nodeModules = {};
@@ -54,6 +54,11 @@ const commonConfig = merge([
   },
   parts.lintJavaScript({ include: PATHS.app }),
   parts.lintCSS({ include: PATHS.app }),
+  parts.loadFonts({
+    options: {
+      name: '[name].[ext]',
+    },
+  }),
 ]);
 
 const productionConfig = merge([
@@ -62,6 +67,12 @@ const productionConfig = merge([
   }),
   parts.purifyCSS({
     paths: glob.sync(path.join(PATHS.app, '**', '*')),
+  }),
+  parts.loadImages({
+    options: {
+      limit: 15000,
+      name: '[name].[ext]',
+    },
   }),
 ]);
 
@@ -77,6 +88,7 @@ const developmentConfig = merge([
     port: process.env.PORT,
   }),
   parts.loadCSS(),
+  parts.loadImages(),
 ]);
 
 module.exports = function(env) {

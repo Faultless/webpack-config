@@ -1,0 +1,120 @@
+[
+    {
+        "muscleGroup": [
+            "delts",
+            "triceps", 
+            "biceps", 
+            "traps", 
+            "pecs", 
+            "lats", 
+            "obliques", 
+            "abs",
+            "glutes",
+            "calves",
+            "abductors",
+            "lower back",
+            "upper back",
+            "quads",
+            "hams",
+            "forearms"
+        ],
+        "category": ["weight training", "bodyweight training", "cardio"],
+        "exercise": [
+            {
+                "id": "1",
+                "name": "bench press",
+                "category": "weight training",
+                "muscleGroups": ["pecs", "triceps"],
+                "demoVideo": "https://www.youtube.com/watch?v=gRVjAtPip0Y"
+            }
+        ],
+        "workout": [
+            {
+                "name": "3-split routine",
+                "category": "weight training",
+                "bodyBuilderID": 1,
+                "exercises": [
+                    {
+                        "name": "bench press",
+                        "sets": 3,
+                        "reps": 8,
+                        "distance": "",
+                        "time": ""
+                    }
+                ]
+            }
+        ],
+        "convention": [
+            {
+                "SI": {
+                    "weight": "kg",
+                    "height": "m",
+                    "time": "s",
+                    "speed": "m/s"
+                }
+            },
+            {}
+        ],
+        "bodyBuilder": [
+            {
+                "id": "1",
+                "name": {
+                    "firstName": "Serge",
+                    "lastName": "Kamel"
+                },
+                "weight": 77,
+                "height": 180,
+                "email": "kamel.serge@hotmail.fr",
+                "measureConvention": "SI",
+                "fitnessProfile": {
+                    "current": {
+                        "weightTraining": [
+                            {
+                                "exerciseName": "deadlift", 
+                                "1RM": 110,
+                                "date": "27-02-2017"
+                            },
+                            {
+                                "exerciseName": "squat",
+                                "1RM": 130,
+                                "date": "27-02-2017"
+                            },
+                            {
+                                "exerciseName": "bench press",
+                                "1RM": 90,
+                                "date": "27-02-2017"
+                            }
+                        ],
+                        "calisthenics": {
+                            "muscleUp": {},
+                            "frontLever": {},
+                            "pistolSquat": {},
+                            "vSit": {}
+                        },
+                        "cardioTraining": {
+                            "jogging": {
+                                "maxDistance": 10,
+                                "averageSpeed": 10,
+                                "date": "27-12-2016"
+                            }
+                        }
+                    },
+                    "history": [
+                        {
+                            "25-2-2016": {
+                                "weightTraining": {
+                                    "deadLift": {
+                                        "1RM": 50
+                                    }
+                                }
+                            }
+                        },
+                        {   
+                            "10-4-2016": {}
+                        }
+                    ]
+                }
+            }
+        ]
+    }   
+]
