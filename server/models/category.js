@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var category = new mongoose.Schema({
-    _exercise: { type: Number, ref: 'Exercise' },
+    _id: { type: Number, index: true },
     name: String
 });
 

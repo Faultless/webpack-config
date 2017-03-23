@@ -15,7 +15,7 @@ muscleGroup.route('/')
     // create a muscle group
     .post((req, res) => {
         var newGroup = new model({
-            _exercise: req.body.exercise,
+            _id: req.body.id,
             name: req.body.name
         });
 
@@ -38,10 +38,29 @@ muscleGroup.route('/:muscleId')
 
     // modify a specific muscle group 
     .put((req, res) => {
+        var newGroup = model.findById(req.params.muscleId, (err, Group) => {
+            if(err)
+                res.send(err);
+            Group
+                .name = req.body.name;
 
+            Group.save((err) => {
+                if(err)
+                    res.send(err);
+                res.json({message: "Muscle group Modified!"});
+            });
+        });
     })
 
     // delete a specific muscle group
     .delete((req, res) => {
-
+        model.remove({ 
+            _id: req.body.muscleId
+            }, (err) => {
+                if(err)
+                    res.send(err);
+                res.json({message: 'Successfully Removed Group.'});
+        })
     });
+
+module.exports = muscleGroup;

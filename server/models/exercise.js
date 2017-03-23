@@ -9,8 +9,8 @@ var exerciseSchema = new mongoose.Schema({
         index: true
     },
     name: String,
-    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category.name' },
-    muscleGroups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MuscleGroup.name' }],
+    category: { type: mongoose.Schema.ObjectId, ref: 'Category.Schema' },
+    muscleGroups: [{ type: mongoose.Schema.ObjectId, ref: 'MuscleGroup.Schema' }],
     demoVideo: String
 }); 
 
