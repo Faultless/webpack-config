@@ -15,7 +15,6 @@ muscleGroup.route('/')
     // create a muscle group
     .post((req, res) => {
         var newGroup = new model({
-            _id: req.body.id,
             name: req.body.name
         });
 

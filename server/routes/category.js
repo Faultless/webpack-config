@@ -15,7 +15,6 @@ category.route('/')
     // create a category
     .post((req, res) => {
         var newCategory = new model({
-            _id: req.body.id,
             name: req.body.name
         });
 

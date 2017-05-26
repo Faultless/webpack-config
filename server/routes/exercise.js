@@ -1,5 +1,6 @@
 var express = require('express');
 var model = require('../models/exercise');
+var category = require('../models/category');
 var exercise = express.Router();
 
 exercise.route('/')
@@ -14,22 +15,27 @@ exercise.route('/')
 
     // Create an exercise
     .post((req, res) => {
-        var newExercise = new model({
-            _id: req.body.id,
-            name: req.body.name,
-            category: req.body.category,
-            demoVideo: req.body.demoVideo
-        });
-
-        req.body.muscleGroups.forEach((element, index, array) => {
-            newExercise.muscleGroups[index] = element;
-        });
-
-        newExercise.save((err) => {
+        category.find({ 'name': req.body.category }, (err, Category) => {
             if(err)
                 res.send(err);
-            res.json({ message: 'Exercise created!' });
+            var newExercise = new model({
+                name: req.body.name,
+                category: Category[0]._id,
+                demoVideo: req.body.demoVideo
+            });
+
+            req.body.muscleGroups.forEach((element, index, array) => {
+                newExercise.muscleGroups[index] = element;
+            });
+
+            newExercise.save((err) => {
+                if(err)
+                    res.send(err);
+                res.json({ message: 'Exercise created!' });
+            });
         });
+
+        
     });
 
 exercise.route('/:exerciseId')
